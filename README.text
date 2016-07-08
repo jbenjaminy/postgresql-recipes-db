@@ -1,8 +1,8 @@
 /*------------------------------ TABLES --------------------------------*/
 
-    ****** RECIPES *****                                                                                                     
-     id |      name       |                             description                              
-    ----+-----------------+----------------------------------------------------------------------
+    ****** RECIPES *****                
+     id |      name       | description                              
+    ----+-----------------+----------------------------------------------------
       2 | Shahi Paneer    | Cheese in a thick cream and tomato gravy and spices
       3 | Gaja Matar Aloo | Diced carrots and potatoes sauted with black mustard leaves
       5 | Khichidi Kadhi  | Rice and lentils with a yogurt gravy
@@ -12,8 +12,8 @@
     
     
     ***** INGREDIENTS_NUM *****
-     id | recipes_id | quantity                                                                                                              
-    ----+------------+----------                                                                                                             
+     id | recipes_id | quantity                                
+    ----+------------+----------                                
       1 |          2 |        4                                                                                                              
       2 |          3 |        3                                                                                                              
       3 |          5 |        3                                                                                                              
@@ -23,8 +23,8 @@
     
     
     ***** TAGS *****
-     id |      tag                                                                                                                           
-    ----+----------------                                                                                                                    
+     id |      tag                                   
+    ----+----------------                            
       1 | vegetarian                                                                                                                         
       2 | contains dairy                                                                                                                     
       3 | contains meat 
@@ -32,8 +32,8 @@
     
     
     ***** RECIPES_TAGS *****
-     recipe_id | tag_id                                                                                                                      
-    -----------+--------                                                                                                                     
+     recipe_id | tag_id                                              
+    -----------+--------                      
              5 |      1                                                                                                                      
              2 |      2                                                                                                                      
              5 |      2                                                                                                                      
@@ -41,8 +41,8 @@
     
     
     ***** STEPS *****
-     id |    name    |                                        description                                                                    
-    ----+------------+-------------------------------------------------------------------------------------------                            
+     id |    name    | description                                                                    
+    ----+------------+---------------------------------------------------------  
       1 | step one   | Boil vegetables for 8-10 min until soft
       2 | step two   | Add spices and simmer for 10-12 min until gravy thickens
       3 | step three | Wisk in cream and paneer and simmer until paneer is cooked
@@ -62,8 +62,8 @@
     
     
     ***** RECIPES_STEPS *****
-     recipe_id | step_id                                                                                                                     
-    -----------+---------                                                                                                                    
+     recipe_id | step_id                             
+    -----------+---------                    
              2 |       1                                                                                                                     
              2 |       2                                                                                                                     
              2 |       3                                                                                                                     
@@ -107,7 +107,8 @@
 
 
     ***** ONE-TO-MANY RIGHT OUTER JOIN *****
-    recipes=# select recipes.name, ingredients_num.quantity from recipes right outer join ingredients_num on ingredients_num.recipes_id = recipes.id;                                                                     
+    recipes=# select recipes.name, ingredients_num.quantity from recipes right outer join ingredients_num on ingredients_num.recipes_id = recipes.id;      
+
           name       | quantity 
     -----------------+----------
      Shahi Paneer    |        4
@@ -119,7 +120,8 @@
 
 
     ***** ONE-TO-MANY FULL JOIN *****
-    recipes=# select recipes.name, ingredients_num.quantity from recipes full join ingredients_num on ingredients_num.recipes_id = recipes.id;                                                                            
+    recipes=# select recipes.name, ingredients_num.quantity from recipes full join ingredients_num on ingredients_num.recipes_id = recipes.id;             
+
           name       | quantity 
     -----------------+----------
      Shahi Paneer    |        4
@@ -206,8 +208,8 @@
     ***** MANY-TO-MANY INNER JOIN (without 'where' clause) *****
     select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id;   
     
-              name       |                                        description                                        
-    -----------------+-------------------------------------------------------------------------------------------
+              name   | description                                        
+    -----------------+--------------------------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -227,8 +229,8 @@
     ***** MANY-TO-MANY LEFT JOIN (left join + left join) *****
     select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id left join steps on recipes_steps.step_id = steps.id;
     
-              name       |                                        description                                        
-    -----------------+-------------------------------------------------------------------------------------------
+              name   | description                                        
+    -----------------+---------------------------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -249,8 +251,8 @@
     ***** MANY-TO-MANY RIGHT JOIN (inner join + right join) *****
     select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id right join steps on recipes_steps.step_id = steps.id;
     
-              name       |                                        description                                        
-    -----------------+-------------------------------------------------------------------------------------------
+              name   | description                                        
+    -----------------+---------------------------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -261,7 +263,7 @@
      Bhindi Masala   | Dice onion and tomatoes
      Bhindi Masala   | Saute for 25 mins, adding spices one at a time
      Khichidi Kadhi  | Heat oil in pot and fry minced onion and spices for a couple minutes
-     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer for 20 min
+     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer
      Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer for 10 to 20min
      Khichidi Kadhi  | Serve yogurt and lentils together with roasted papads
                      | Cook over medium heat for 15 min
@@ -272,8 +274,8 @@
     ***** MANY-TO-MANY FULL JOIN (left join + full join) *****
     select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id full join steps on recipes_steps.step_id = steps.id;     
     
-              name       |                                        description                                        
-    -----------------+-------------------------------------------------------------------------------------------
+              name   | description                                        
+    -----------------+-----------------------------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
