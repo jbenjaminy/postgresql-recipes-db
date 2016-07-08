@@ -36,13 +36,13 @@
     -----------+--------                      
              5 |      1
              2 |      2
-             5 |      2                                                                                                                      
+             5 |      2                 
     (3 rows)       
     
     
     ***** STEPS *****
      id |    name    | description
-    ----+------------+-----------------------------------------------------
+    ----+------------+----------------------------------------
       1 | step one   | Boil vegetables for 8-10 min until soft
       2 | step two   | Add spices and simmer for 10-12 min until gravy thickens
       3 | step three | Wisk in cream and paneer and simmer until paneer is cooked
@@ -85,7 +85,7 @@
     /*----------- RECIPES/INGREDIENTS_NUM JOINS -----------*/
     
     ***** ONE-TO-MANY INNER JOIN *****
-        recipes=# select recipes.name, ingredients_num.quantity from recipes join ingredients_num on ingredients_num.recipes_id = recipes.id;
+    recipes=# select recipes.name, ingredients_num.quantity from recipes join ingredients_num on ingredients_num.recipes_id = recipes.id;
 
           name       | quantity 
     -----------------+----------
@@ -96,7 +96,7 @@
 
 
     ***** ONE-TO-MANY LEFT OUTER JOIN *****
-        recipes=# select recipes.name, ingredients_num.quantity from recipes left outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
+    recipes=# select recipes.name, ingredients_num.quantity from recipes left outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
     
           name       | quantity 
     -----------------+----------
@@ -108,7 +108,7 @@
 
 
     ***** ONE-TO-MANY RIGHT OUTER JOIN *****
-        recipes=# select recipes.name, ingredients_num.quantity from recipes right outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
+    recipes=# select recipes.name, ingredients_num.quantity from recipes right outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
 
           name       | quantity 
     -----------------+----------
@@ -121,7 +121,7 @@
 
 
     ***** ONE-TO-MANY FULL JOIN *****
-        recipes=# select recipes.name, ingredients_num.quantity from recipes full join ingredients_num on ingredients_num.recipes_id = recipes.id;
+    recipes=# select recipes.name, ingredients_num.quantity from recipes full join ingredients_num on ingredients_num.recipes_id = recipes.id;
 
           name       | quantity 
     -----------------+----------
@@ -137,7 +137,7 @@
     /*----------- RECIPES/TAGS JOINS ----------*/
     
     ***** MANY-TO-MANY INNER JOIN (with 'where' clause) *****
-        recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id where recipes.name='Shahi Paneer'; 
+    recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id where recipes.name='Shahi Paneer'; 
 
          name     |      tag       
     --------------+----------------
@@ -146,7 +146,7 @@
 
 
     ***** MANY-TO-MANY INNER JOIN (without 'where' clause) *****
-        recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id;
+    recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id;
 
           name      |      tag       
     ----------------+----------------
@@ -156,7 +156,7 @@
 
 
     ***** MANY-TO-MANY LEFT JOIN (left join + left join) *****
-        recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id left join tags on recipes_tags.tag_id = tags.id;
+    recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id left join tags on recipes_tags.tag_id = tags.id;
 
           name       |      tag       
     -----------------+----------------
@@ -169,7 +169,7 @@
 
 
     ***** MANY-TO-MANY RIGHT JOIN (inner join + right join) *****
-        recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id right join tags on recipes_tags.tag_id = tags.id;
+    recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id right join tags on recipes_tags.tag_id = tags.id;
 
           name      |      tag       
     ----------------+----------------
@@ -181,7 +181,7 @@
 
 
     ***** MANY-TO-MANY FULL JOIN (left join + full join) *****
-        recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id full join tags on recipes_tags.tag_id = tags.id;
+    recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id full join tags on recipes_tags.tag_id = tags.id;
 
           name       |      tag       
     -----------------+----------------
@@ -197,7 +197,7 @@
     /*----------- RECIPES/STEPS JOINS -----------*/
     
     ***** MANY-TO-MANY INNER JOIN (with 'where' clause) *****
-        recipes=# select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id where recipes.name='Shahi Paneer';
+    recipes=# select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id where recipes.name='Shahi Paneer';
 
          name     | description                         
     --------------+----------------------------------------
@@ -208,7 +208,7 @@
     
     
     ***** MANY-TO-MANY INNER JOIN (without 'where' clause) *****
-        select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id;
+    select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id;
 
               name   | description
     -----------------+----------------------------------------
@@ -229,7 +229,7 @@
     
     
     ***** MANY-TO-MANY LEFT JOIN (left join + left join) *****
-        select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id left join steps on recipes_steps.step_id = steps.id;
+    select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id left join steps on recipes_steps.step_id = steps.id;
 
               name   | description
     -----------------+----------------------------------------
@@ -251,7 +251,7 @@
 
     
     ***** MANY-TO-MANY RIGHT JOIN (inner join + right join) *****
-        select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id right join steps on recipes_steps.step_id = steps.id;
+    select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id right join steps on recipes_steps.step_id = steps.id;
 
               name   | description
     -----------------+----------------------------------------
