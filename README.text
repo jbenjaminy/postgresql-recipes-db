@@ -1,7 +1,7 @@
 /*------------------------------ TABLES --------------------------------*/
 
-    ****** RECIPES *****                
-     id |      name       | description                              
+    ****** RECIPES ***** 
+     id |      name       | description 
     ----+-----------------+----------------------------------------------------
       2 | Shahi Paneer    | Cheese in a thick cream and tomato gravy and spices
       3 | Gaja Matar Aloo | Diced carrots and potatoes sauted with black mustard leaves
@@ -12,37 +12,37 @@
     
     
     ***** INGREDIENTS_NUM *****
-     id | recipes_id | quantity                                
+     id | recipes_id | quantity
     ----+------------+----------                                
-      1 |          2 |        4                                                                                                              
-      2 |          3 |        3                                                                                                              
-      3 |          5 |        3                                                                                                              
-      6 |            |       42                                                                                                              
-      7 |            |       28       
+      1 |          2 |        4  
+      2 |          3 |        3
+      3 |          5 |        3
+      6 |            |       42
+      7 |            |       28
     (5 rows)
     
     
     ***** TAGS *****
      id |      tag                                   
-    ----+----------------                            
-      1 | vegetarian                                                                                                                         
-      2 | contains dairy                                                                                                                     
-      3 | contains meat 
+    ----+----------------
+      1 | vegetarian      
+      2 | contains dairy            
+      3 | contains meat
     (3 rows)
     
     
     ***** RECIPES_TAGS *****
      recipe_id | tag_id                                              
     -----------+--------                      
-             5 |      1                                                                                                                      
-             2 |      2                                                                                                                      
+             5 |      1
+             2 |      2
              5 |      2                                                                                                                      
     (3 rows)       
     
     
     ***** STEPS *****
-     id |    name    | description                                                                    
-    ----+------------+---------------------------------------------------------  
+     id |    name    | description
+    ----+------------+-----------------------------------------------------
       1 | step one   | Boil vegetables for 8-10 min until soft
       2 | step two   | Add spices and simmer for 10-12 min until gravy thickens
       3 | step three | Wisk in cream and paneer and simmer until paneer is cooked
@@ -53,8 +53,8 @@
       8 | step two   | Dice onion and tomatoes
       9 | step three | Saute for 25 mins, adding spices one at a time
      10 | step one   | Heat oil in pot and fry minced onion and spices for a couple minutes
-     11 | step two   | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer for 20 min
-     12 | step three | Whisk together yogurt with salt, sugar and spices and simmer for 10 to 20min
+     11 | step two   | Add 3-4 cups water, mixed diced vegetables, rice and lentils and simmer
+     12 | step three | Whisk together yogurt with salt and spices and simmer
      13 | step four  | Serve yogurt and lentils together with roasted papads
      14 | step one   | Dice vegetables
      15 | step two   | Cook over medium heat for 15 min
@@ -62,21 +62,21 @@
     
     
     ***** RECIPES_STEPS *****
-     recipe_id | step_id                             
+     recipe_id | step_id
     -----------+---------                    
-             2 |       1                                                                                                                     
-             2 |       2                                                                                                                     
-             2 |       3                                                                                                                     
-             3 |       4                                                                                                                     
-             3 |       5                                                                                                                     
-             3 |       6                                                                                                                     
-             6 |       7                                                                                                                     
-             6 |       8                                                                                                                     
-             6 |       9                                                                                                                     
-             5 |      10                                                                                                                     
-             5 |      11                                                                                                                     
-             5 |      12                                                                                                                     
-             5 |      13                                                                                                                     
+             2 |       1 
+             2 |       2 
+             2 |       3 
+             3 |       4
+             3 |       5
+             3 |       6
+             6 |       7
+             6 |       8
+             6 |       9
+             5 |      10
+             5 |      11
+             5 |      12
+             5 |      13       
     (13 rows) 
          
     
@@ -85,7 +85,8 @@
     /*----------- RECIPES/INGREDIENTS_NUM JOINS -----------*/
     
     ***** ONE-TO-MANY INNER JOIN *****
-    recipes=# select recipes.name, ingredients_num.quantity from recipes join ingredients_num on ingredients_num.recipes_id = recipes.id;                                                                                 
+        recipes=# select recipes.name, ingredients_num.quantity from recipes join ingredients_num on ingredients_num.recipes_id = recipes.id;
+
           name       | quantity 
     -----------------+----------
      Shahi Paneer    |        4
@@ -95,7 +96,7 @@
 
 
     ***** ONE-TO-MANY LEFT OUTER JOIN *****
-    recipes=# select recipes.name, ingredients_num.quantity from recipes left outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
+        recipes=# select recipes.name, ingredients_num.quantity from recipes left outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
     
           name       | quantity 
     -----------------+----------
@@ -107,7 +108,7 @@
 
 
     ***** ONE-TO-MANY RIGHT OUTER JOIN *****
-    recipes=# select recipes.name, ingredients_num.quantity from recipes right outer join ingredients_num on ingredients_num.recipes_id = recipes.id;      
+        recipes=# select recipes.name, ingredients_num.quantity from recipes right outer join ingredients_num on ingredients_num.recipes_id = recipes.id;
 
           name       | quantity 
     -----------------+----------
@@ -120,7 +121,7 @@
 
 
     ***** ONE-TO-MANY FULL JOIN *****
-    recipes=# select recipes.name, ingredients_num.quantity from recipes full join ingredients_num on ingredients_num.recipes_id = recipes.id;             
+        recipes=# select recipes.name, ingredients_num.quantity from recipes full join ingredients_num on ingredients_num.recipes_id = recipes.id;
 
           name       | quantity 
     -----------------+----------
@@ -136,7 +137,7 @@
     /*----------- RECIPES/TAGS JOINS ----------*/
     
     ***** MANY-TO-MANY INNER JOIN (with 'where' clause) *****
-    recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id where recipes.name='Shahi Paneer';   
+        recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id where recipes.name='Shahi Paneer'; 
 
          name     |      tag       
     --------------+----------------
@@ -145,8 +146,8 @@
 
 
     ***** MANY-TO-MANY INNER JOIN (without 'where' clause) *****
-    recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id;
-    
+        recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id join tags on recipes_tags.tag_id = tags.id;
+
           name      |      tag       
     ----------------+----------------
      Khichidi Kadhi | vegetarian
@@ -155,8 +156,8 @@
 
 
     ***** MANY-TO-MANY LEFT JOIN (left join + left join) *****
-    recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id left join tags on recipes_tags.tag_id = tags.id;        
-    
+        recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id left join tags on recipes_tags.tag_id = tags.id;
+
           name       |      tag       
     -----------------+----------------
      Khichidi Kadhi  | vegetarian
@@ -168,8 +169,8 @@
 
 
     ***** MANY-TO-MANY RIGHT JOIN (inner join + right join) *****
-    recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id right join tags on recipes_tags.tag_id = tags.id;
-    
+        recipes=# select recipes.name, tags.tag from recipes join recipes_tags on recipes_tags.recipe_id = recipes.id right join tags on recipes_tags.tag_id = tags.id;
+
           name      |      tag       
     ----------------+----------------
      Khichidi Kadhi | vegetarian
@@ -180,8 +181,8 @@
 
 
     ***** MANY-TO-MANY FULL JOIN (left join + full join) *****
-    recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id full join tags on recipes_tags.tag_id = tags.id;   
-    
+        recipes=# select recipes.name, tags.tag from recipes left join recipes_tags on recipes_tags.recipe_id = recipes.id full join tags on recipes_tags.tag_id = tags.id;
+
           name       |      tag       
     -----------------+----------------
      Khichidi Kadhi  | vegetarian
@@ -196,9 +197,10 @@
     /*----------- RECIPES/STEPS JOINS -----------*/
     
     ***** MANY-TO-MANY INNER JOIN (with 'where' clause) *****
-    recipes=# select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id where recipes.name='Shahi Paneer';                                                                                                                        
-         name     |                        description                         
-    --------------+------------------------------------------------------------
+        recipes=# select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id where recipes.name='Shahi Paneer';
+
+         name     | description                         
+    --------------+----------------------------------------
      Shahi Paneer | Boil vegetables for 8-10 min until soft
      Shahi Paneer | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer | Wisk in cream and paneer and simmer until paneer is cooked
@@ -206,10 +208,10 @@
     
     
     ***** MANY-TO-MANY INNER JOIN (without 'where' clause) *****
-    select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id;   
-    
-              name   | description                                        
-    -----------------+--------------------------------------------------------
+        select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id join steps on recipes_steps.step_id = steps.id;
+
+              name   | description
+    -----------------+----------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -220,17 +222,17 @@
      Bhindi Masala   | Dice onion and tomatoes
      Bhindi Masala   | Saute for 25 mins, adding spices one at a time
      Khichidi Kadhi  | Heat oil in pot and fry minced onion and spices for a couple minutes
-     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer for 20 min
-     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer for 10 to 20min
+     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils and simmer
+     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer
      Khichidi Kadhi  | Serve yogurt and lentils together with roasted papads
     (13 rows)
     
     
     ***** MANY-TO-MANY LEFT JOIN (left join + left join) *****
-    select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id left join steps on recipes_steps.step_id = steps.id;
-    
-              name   | description                                        
-    -----------------+---------------------------------------------------------
+        select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id left join steps on recipes_steps.step_id = steps.id;
+
+              name   | description
+    -----------------+----------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -241,18 +243,18 @@
      Bhindi Masala   | Dice onion and tomatoes
      Bhindi Masala   | Saute for 25 mins, adding spices one at a time
      Khichidi Kadhi  | Heat oil in pot and fry minced onion and spices for a couple minutes
-     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer for 20 min
-     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer for 10 to 20min
+     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils and simmer
+     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer
      Khichidi Kadhi  | Serve yogurt and lentils together with roasted papads
      Aloo gobi       | 
     (14 rows)
 
     
     ***** MANY-TO-MANY RIGHT JOIN (inner join + right join) *****
-    select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id right join steps on recipes_steps.step_id = steps.id;
-    
-              name   | description                                        
-    -----------------+---------------------------------------------------------
+        select recipes.name, steps.description from recipes join recipes_steps on recipes_steps.recipe_id = recipes.id right join steps on recipes_steps.step_id = steps.id;
+
+              name   | description
+    -----------------+----------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -263,8 +265,8 @@
      Bhindi Masala   | Dice onion and tomatoes
      Bhindi Masala   | Saute for 25 mins, adding spices one at a time
      Khichidi Kadhi  | Heat oil in pot and fry minced onion and spices for a couple minutes
-     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer
-     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer for 10 to 20min
+     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils and simmer
+     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer
      Khichidi Kadhi  | Serve yogurt and lentils together with roasted papads
                      | Cook over medium heat for 15 min
                      | Dice vegetables
@@ -272,10 +274,10 @@
     
     
     ***** MANY-TO-MANY FULL JOIN (left join + full join) *****
-    select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id full join steps on recipes_steps.step_id = steps.id;     
-    
-              name   | description                                        
-    -----------------+-----------------------------------------------------------
+    select recipes.name, steps.description from recipes left join recipes_steps on recipes_steps.recipe_id = recipes.id full join steps on recipes_steps.step_id = steps.id;
+
+              name   | description
+    -----------------+-----------------------------------------
      Shahi Paneer    | Boil vegetables for 8-10 min until soft
      Shahi Paneer    | Add spices and simmer for 10-12 min until gravy thickens
      Shahi Paneer    | Wisk in cream and paneer and simmer until paneer is cooked
@@ -286,8 +288,8 @@
      Bhindi Masala   | Dice onion and tomatoes
      Bhindi Masala   | Saute for 25 mins, adding spices one at a time
      Khichidi Kadhi  | Heat oil in pot and fry minced onion and spices for a couple minutes
-     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils to pot and simmer for 20 min
-     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer for 10 to 20min
+     Khichidi Kadhi  | Add 3-4 cups water, mixed diced vegetables, rice and lentils and simmer
+     Khichidi Kadhi  | Whisk together yogurt with salt, sugar and spices and simmer
      Khichidi Kadhi  | Serve yogurt and lentils together with roasted papads
      Aloo gobi       | 
                      | Cook over medium heat for 15 min
